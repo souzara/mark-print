@@ -40,37 +40,191 @@ header p {
     opacity: 0.9;
 }
 
-/* Seletor de idioma */
+/* Seletor de idioma com bandeiras */
 .language-selector {
     position: absolute;
     top: 20px;
     right: 20px;
 }
 
-.language-selector select {
-    padding: 8px 12px;
-    border: 2px solid #e9ecef;
-    border-radius: 6px;
+.flag-buttons {
+    display: flex;
+    gap: 4px;
     background: white;
-    font-size: 0.9rem;
+    padding: 6px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.flag-btn {
+    width: 35px;
+    height: 25px;
+    border: 2px solid #e9ecef;
+    border-radius: 4px;
+    background: white;
     cursor: pointer;
     transition: all 0.3s ease;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
 }
 
-.language-selector select:hover {
+.flag-btn:hover {
     border-color: #007acc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+}
+
+.flag-btn.active {
+    border-color: #007acc;
+    background: #f0f8ff;
     transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
 }
 
-.language-selector select:focus {
+.flag-btn:active {
+    transform: translateY(0);
+}
+
+/* Tooltips personalizados */
+[title] {
+    position: relative;
+}
+
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 999999;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    pointer-events: none;
+}
+
+/* Estilos das imagens das bandeiras */
+.flag-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+.flag-btn.active .flag-img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.flag-btn:hover .flag-img {
+    transform: scale(1.05);
     border-color: #007acc;
-    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
 /* Posicionamento relativo para o header */
 header {
     position: relative;
+}
+
+.header-actions {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.github-link-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.github-link-compact:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.github-link-compact i {
+    font-size: 1rem;
+}
+
+/* Tooltip específico para o botão GitHub no header - sobrescreve o padrão */
+.github-link-compact[title]:hover::after {
+    content: attr(title) !important;
+    position: absolute !important;
+    right: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
+    z-index: 99999999 !important;
+    pointer-events: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    max-width: 200px !important;
+    word-wrap: break-word !important;
+    margin-right: 10px !important;
+    bottom: auto !important;
+    left: auto !important;
+}
+
+.github-link-compact[title]:hover::before {
+    content: '' !important;
+    position: absolute !important;
+    right: 100% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border: 6px solid transparent !important;
+    border-left-color: rgba(0, 0, 0, 0.9) !important;
+    z-index: 99999999 !important;
+    pointer-events: none !important;
+    margin-right: 4px !important;
+    bottom: auto !important;
+    left: auto !important;
+    border-bottom-color: transparent !important;
 }
 
 main {
@@ -86,7 +240,9 @@ main {
     background: white;
     border-radius: 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
 }
 
 .editor-header, .preview-header {
@@ -96,6 +252,8 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
 .editor-header h3, .preview-header h3 {
@@ -103,41 +261,50 @@ main {
     font-size: 1.2rem;
 }
 
-.preview-actions {
+.preview-actions, .editor-actions {
     display: flex;
     gap: 10px;
 }
 
 .btn-primary, .btn-secondary {
-    padding: 10px 20px;
+    padding: 12px 16px;
     border: none;
-    border-radius: 0;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 8px;
+    min-width: 44px;
+    height: 44px;
+    position: relative;
+}
+
+.btn-primary i, .btn-secondary i {
+    font-size: 1.1rem;
 }
 
 .btn-primary {
-    background: #007acc;
+    background: #343a40;
     color: white;
 }
 
 .btn-primary:hover {
+    background: #212529;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 122, 204, 0.4);
+    box-shadow: 0 5px 15px rgba(52, 58, 64, 0.4);
 }
 
 .btn-secondary {
-    background: #6c757d;
+    background: #343a40;
     color: white;
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #212529;
     transform: translateY(-2px);
 }
 
@@ -152,6 +319,8 @@ main {
     font-size: 14px;
     line-height: 1.6;
     outline: none;
+    position: relative;
+    z-index: 1;
 }
 
 .preview-content {
@@ -249,6 +418,48 @@ footer {
     color: #666;
     opacity: 0.8;
     margin-top: auto;
+    padding: 20px 0;
+}
+
+.github-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.github-section p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.github-link:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.github-link i {
+    font-size: 1.2rem;
+}
+
+.open-source {
+    font-size: 0.8rem !important;
+    opacity: 0.7;
+    margin-top: 10px !important;
 }
 
 /* Estilos para impressão */
@@ -356,6 +567,32 @@ footer {
     #markdownEditor, .preview-content {
         height: calc(50vh - 100px);
         min-height: 300px;
+    }
+    
+    /* Ajustes para botões de bandeira em mobile */
+    .language-selector {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .header-actions {
+        top: 60px;
+        right: 10px;
+    }
+    
+    .github-link-compact {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .flag-buttons {
+        padding: 4px;
+        gap: 3px;
+    }
+    
+    .flag-btn {
+        width: 30px;
+        height: 22px;
     }
 }
 

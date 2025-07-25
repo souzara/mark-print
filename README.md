@@ -1,142 +1,179 @@
-# 📄 Mark Print - Conversor Markdown para PDF
+# 📄 Mark Print - Markdown to PDF Converter
 
-Uma aplicação web simples e elegante para converter documentos Markdown em PDF com preview em tempo real.
+A simple and elegant web application to convert Markdown documents to PDF with real-time preview.
 
-## ✨ Funcionalidades
+## ✨ Features
 
-- **Editor Markdown**: Interface limpa para escrever ou colar código markdown
-- **Preview em Tempo Real**: Visualização instantânea do resultado
-- **Impressão para PDF**: Botão dedicado para gerar PDF
-- **Syntax Highlighting**: Destaque de sintaxe para blocos de código
-- **Impressão com Cores**: Preserva cores de fundo e syntax highlighting na impressão
-- **Internacionalização**: Suporte para Inglês, Português e Espanhol
-- **Detecção Automática**: Identifica automaticamente o idioma do navegador
-- **Responsivo**: Funciona em desktop e dispositivos móveis
-- **Auto-save**: Salva automaticamente o conteúdo no navegador
-- **Atalhos de Teclado**: Comandos rápidos para imprimir e copiar
+### 🎯 Core Features
+- **Markdown Editor**: Clean interface to write or paste markdown code
+- **Real-time Preview**: Instant visualization of the result
+- **File Upload**: Load .md files directly into the editor
+- **PDF Download**: High-quality PDF generation
+- **Direct Printing**: Print formatted content
+- **Copy HTML**: Copy generated HTML for use in other projects
 
-## 🚀 Como Usar
+### 🎨 Visual Features
+- **Syntax Highlighting**: Syntax highlighting for code blocks
+- **Color Printing**: Preserves background colors and syntax highlighting in print
+- **Modern Interface**: Clean and professional design with gradients
+- **Smooth Animations**: Transitions and visual effects
+- **Dynamic Tooltips**: Contextual tips that change with language
 
-1. **Abra o arquivo `index.html`** no seu navegador
-2. **Cole ou digite** seu código markdown no editor
-3. **Visualize** o resultado no preview ao lado
-4. **Clique em "🖨️ Imprimir PDF"** para gerar o PDF
-5. **Use "📋 Copiar HTML"** para copiar o HTML gerado
+### 🌍 Internationalization
+- **3 Languages**: Full support for English, Portuguese and Spanish
+- **Auto Detection**: Automatically detects browser language
+- **Visual Selector**: Flags for quick language switching
+- **Translated Tooltips**: All tooltips change automatically
 
-## ⌨️ Atalhos de Teclado
+### 📱 User Experience
+- **Responsive**: Works perfectly on desktop and mobile devices
+- **Keyboard Shortcuts**: Quick commands for all actions
+- **Auto Example**: Loads markdown example when opening the page
+- **Visual Feedback**: Visual confirmations for all actions
 
-- **Ctrl/Cmd + Enter**: Imprimir PDF
-- **Ctrl/Cmd + Shift + C**: Copiar HTML
+### 🔗 GitHub Integration
+- **Compact Button**: Quick access in header
+- **Complete Section**: Highlight in footer with message
+- **Open Source**: Clear indication of project status
 
-## 📋 Exemplo de Markdown Suportado
+## 🚀 How to Use
 
-A aplicação suporta todos os elementos padrão do Markdown:
+1. **Open the `index.html` file** in your browser
+2. **Example loaded automatically** - you'll see a markdown example
+3. **Upload** a .md file or **paste/type** your code
+4. **View** the result in the preview panel
+5. **Use the buttons** for PDF download, printing or copying HTML
 
-- **Títulos**: `# ## ###`
-- **Negrito**: `**texto**`
-- **Itálico**: `*texto*`
-- **Código inline**: `` `código` ``
-- **Blocos de código**: ```bash ... ```
-- **Listas**: `- item` ou `1. item`
-- **Links**: `[texto](url)`
-- **Imagens**: `![alt](url)`
-- **Tabelas**: `| coluna | coluna |`
-- **Citações**: `> texto`
-- **Linhas horizontais**: `---`
+## ⌨️ Keyboard Shortcuts
 
-## 🛠️ Tecnologias Utilizadas
+- **Ctrl/Cmd + Enter**: Download PDF
+- **Ctrl/Cmd + Shift + P**: Print
+- **Ctrl/Cmd + Shift + C**: Copy HTML
+- **Ctrl/Cmd + O**: Open .md file
 
-- **HTML5**: Estrutura da aplicação
-- **CSS3**: Estilos modernos e responsivos
-- **JavaScript Vanilla**: Funcionalidades sem dependências
-- **Marked.js**: Conversão de Markdown para HTML
-- **Highlight.js**: Destaque de sintaxe para código
-- **Sistema i18n**: Internacionalização personalizada
+## 📁 File Upload
 
-## 📁 Estrutura do Projeto
+- **Click the upload button** (📤 icon) in the editor
+- **Select .md files** from your computer
+- **Content loaded automatically** in the editor
+- **Visual feedback** confirms the upload
+
+## 📋 Supported Markdown Example
+
+The application supports all standard Markdown elements:
+
+- **Headers**: `# ## ###`
+- **Bold**: `**text**`
+- **Italic**: `*text*`
+- **Inline code**: `` `code` ``
+- **Code blocks**: ```bash ... ```
+- **Lists**: `- item` or `1. item`
+- **Links**: `[text](url)`
+- **Images**: `![alt](url)`
+- **Tables**: `| column | column |`
+- **Quotes**: `> text`
+- **Horizontal lines**: `---`
+
+## 🛠️ Technologies Used
+
+- **HTML5**: Application structure
+- **CSS3**: Modern and responsive styles
+- **Vanilla JavaScript**: Functionality without dependencies
+- **Marked.js**: Markdown to HTML conversion
+- **Highlight.js**: Syntax highlighting for code
+- **jsPDF**: PDF generation
+- **html2canvas**: Content capture for PDF
+- **Font Awesome**: Interface icons
+- **i18n System**: Custom internationalization
+
+## 📁 Project Structure
 
 ```
-markprint/
-├── index.html          # Arquivo principal
-├── styles.css          # Estilos da aplicação
-├── script.js           # Funcionalidades JavaScript
-├── i18n.js             # Sistema de internacionalização
-├── teste-codigo.md     # Arquivo de teste em português
-├── teste-espanol.md    # Arquivo de teste em espanhol
-└── README.md           # Este arquivo
+mdprint/
+├── index.html          # Main file
+├── styles.css          # Application styles
+├── script.js           # JavaScript functionality
+├── i18n.js             # Internationalization system
+└── README.md           # This file
 ```
 
-## 🎨 Características do Design
+## 🎨 Design Features
 
-- **Interface Moderna**: Design limpo e profissional
-- **Gradiente Atraente**: Background com gradiente roxo/azul
-- **Animações Suaves**: Transições e efeitos visuais
-- **Tipografia Clara**: Fonte legível e hierarquia visual
-- **Cores Harmoniosas**: Paleta de cores consistente
+- **Modern Interface**: Clean and professional design
+- **Attractive Gradient**: Background with purple/blue gradient
+- **Smooth Animations**: Transitions and visual effects
+- **Clear Typography**: Readable font and visual hierarchy
+- **Harmonious Colors**: Consistent color palette
+- **Elegant Tooltips**: Contextual tips with animations
 
-## 🔧 Personalização
+## 🔧 Customization
 
-Você pode personalizar a aplicação editando:
+You can customize the application by editing:
 
-- **`styles.css`**: Cores, fontes e layout
-- **`script.js`**: Funcionalidades e comportamento
-- **`index.html`**: Estrutura e conteúdo
+- **`styles.css`**: Colors, fonts and layout
+- **`script.js`**: Functionality and behavior
+- **`i18n.js`**: Translations and languages
+- **`index.html`**: Structure and content
 
-## 📱 Compatibilidade
+## 📱 Compatibility
 
 - ✅ Chrome/Chromium
 - ✅ Firefox
 - ✅ Safari
 - ✅ Edge
-- ✅ Dispositivos móveis
+- ✅ Mobile devices
 
-## 🚀 Como Executar
+## 🚀 How to Run
 
-1. Clone ou baixe os arquivos
-2. Abra `index.html` no navegador
-3. Comece a usar!
+1. Clone or download the files
+2. Open `index.html` in your browser
+3. Start using!
 
-Não requer instalação de dependências ou servidor web.
+No dependency installation or web server required.
 
-## 🌍 Idiomas Suportados
+## 🌍 Supported Languages
 
-A aplicação suporta três idiomas:
+The application supports three languages:
 
-- **🇺🇸 Inglês (en)**: Idioma padrão
-- **🇧🇷 Português (pt)**: Suporte completo
-- **🇪🇸 Espanhol (es)**: Suporte completo
+- **🇺🇸 English (en)**: Default language
+- **🇧🇷 Portuguese (pt)**: Full support
+- **🇪🇸 Spanish (es)**: Full support
 
-### Detecção Automática
+### Auto Detection
 
-A aplicação detecta automaticamente o idioma do seu navegador e:
-- Se for português, espanhol ou inglês: usa o idioma detectado
-- Se for qualquer outro idioma: assume inglês como padrão
+The application automatically detects your browser language and:
+- If it's Portuguese, Spanish or English: uses the detected language
+- If it's any other language: assumes English as default
 
-### Mudança Manual de Idioma
+### Manual Language Change
 
-Você pode alterar o idioma manualmente usando o seletor no canto superior direito da aplicação.
+You can change the language manually using the flag selector in the top right corner of the application.
 
-## 🧪 Testando a Impressão
+## 🧪 Testing Printing
 
-Para testar se a impressão com cores está funcionando corretamente:
+To test if color printing is working correctly:
 
-1. Abra um dos arquivos de teste (`teste-codigo.md` ou `teste-espanol.md`) em um editor de texto
-2. Copie todo o conteúdo
-3. Cole no editor do Mark Print
-4. Clique em "🖨️ Imprimir" para testar a impressão
-5. Verifique se os blocos de código mantêm suas cores de fundo e syntax highlighting
+1. **Example already loaded** - you'll see an example when opening the page
+2. **Or upload** a .md file with code
+3. **Click "🖨️ Print"** to test printing
+4. **Verify** that code blocks maintain their background colors and syntax highlighting
 
-**Nota:** Certifique-se de que seu navegador e impressora suportam impressão colorida.
+**Note:** Make sure your browser and printer support color printing.
 
-### Arquivos de Teste Disponíveis
+## ⭐ Contributing
 
-- **`teste-codigo.md`**: Exemplos em português
-- **`teste-espanol.md`**: Exemplos em espanhol
+If you liked the project:
 
-## 📄 Licença
+1. **Give a star** on GitHub using the buttons in the interface
+2. **Share** with other developers
+3. **Report bugs** or suggestions in the repository
 
-Este projeto é de código aberto e pode ser usado livremente.
+## 📄 License
+
+This project is open source and can be used freely.
 
 ---
 
-**Desenvolvido com ❤️ para facilitar a criação de PDFs a partir de Markdown** 
+**Developed with ❤️ to facilitate PDF creation from Markdown**
+
+🔓 **Open Source** - [View on GitHub](https://github.com/souzara/mark-print) 

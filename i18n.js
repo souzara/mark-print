@@ -33,12 +33,18 @@ const i18n = {
             editorTitle: "📝 Markdown Editor",
             editorPlaceholder: "Paste your markdown code here...",
             loadExample: "Load Example",
+            loadExampleTitle: "Load markdown example",
+            uploadBtnTitle: "Load .md file",
+            editorTitle: "Type or paste your markdown content here",
             
             // Preview
             previewTitle: "👁️ Preview",
             downloadBtn: "📥 Download PDF",
+            downloadBtnTitle: "Download PDF",
             printBtn: "🖨️ Print",
+            printBtnTitle: "Print",
             copyBtn: "📋 Copy HTML",
+            copyBtnTitle: "Copy HTML",
             emptyPreview: "Type or paste your markdown in the editor to see the preview...",
             
             // Botões de feedback
@@ -57,6 +63,10 @@ const i18n = {
             
             // Footer
             footer: "Developed with ❤️ to facilitate PDF creation from Markdown",
+            githubStar: "⭐ If you liked it, consider giving a star on GitHub!",
+            githubLink: "View on GitHub",
+            githubCompact: "GitHub",
+            openSource: "🔓 Open Source",
             
             // Exemplo de markdown
             exampleTitle: "# .NET SDK Installation and dump collection on Linux",
@@ -82,12 +92,18 @@ const i18n = {
             editorTitle: "📝 Editor Markdown",
             editorPlaceholder: "Cole seu código markdown aqui...",
             loadExample: "Carregar Exemplo",
+            loadExampleTitle: "Carregar exemplo de markdown",
+            uploadBtnTitle: "Carregar arquivo .md",
+            editorTitle: "Digite ou cole seu conteúdo markdown aqui",
             
             // Preview
             previewTitle: "👁️ Preview",
             downloadBtn: "📥 Download PDF",
+            downloadBtnTitle: "Baixar PDF",
             printBtn: "🖨️ Imprimir",
+            printBtnTitle: "Imprimir",
             copyBtn: "📋 Copiar HTML",
+            copyBtnTitle: "Copiar HTML",
             emptyPreview: "Digite ou cole seu markdown no editor para ver o preview...",
             
             // Botões de feedback
@@ -106,6 +122,10 @@ const i18n = {
             
             // Footer
             footer: "Desenvolvido com ❤️ para facilitar a criação de PDFs a partir de Markdown",
+            githubStar: "⭐ Se você gostou, considere dar uma estrela no GitHub!",
+            githubLink: "Ver no GitHub",
+            githubCompact: "GitHub",
+            openSource: "🔓 Open Source",
             
             // Exemplo de markdown
             exampleTitle: "# Instalação do .NET SDK e coleta de dump no Linux",
@@ -131,12 +151,17 @@ const i18n = {
             editorTitle: "📝 Editor de Markdown",
             editorPlaceholder: "Pega tu código markdown aquí...",
             loadExample: "Cargar Ejemplo",
+            uploadBtnTitle: "Cargar archivo .md",
+            editorTitle: "Escribe o pega tu contenido markdown aquí",
             
             // Preview
             previewTitle: "👁️ Vista Previa",
             downloadBtn: "📥 Descargar PDF",
+            downloadBtnTitle: "Descargar PDF",
             printBtn: "🖨️ Imprimir",
+            printBtnTitle: "Imprimir",
             copyBtn: "📋 Copiar HTML",
+            copyBtnTitle: "Copiar HTML",
             emptyPreview: "Escribe o pega tu markdown en el editor para ver la vista previa...",
             
             // Botões de feedback
@@ -155,6 +180,10 @@ const i18n = {
             
             // Footer
             footer: "Desarrollado con ❤️ para facilitar la creación de PDFs desde Markdown",
+            githubStar: "⭐ ¡Si te gustó, considera dar una estrella en GitHub!",
+            githubLink: "Ver en GitHub",
+            githubCompact: "GitHub",
+            openSource: "🔓 Open Source",
             
             // Exemplo de markdown
             exampleTitle: "# Instalación del SDK de .NET y recolección de dump en Linux",
@@ -207,11 +236,7 @@ const i18n = {
             'subtitle': document.querySelector('header p'),
             'editorTitle': document.querySelector('.editor-header h3'),
             'editorPlaceholder': document.getElementById('markdownEditor'),
-            'loadExample': document.getElementById('loadExample'),
             'previewTitle': document.querySelector('.preview-header h3'),
-            'downloadBtn': document.getElementById('downloadBtn'),
-            'printBtn': document.getElementById('printBtn'),
-            'copyBtn': document.getElementById('copyBtn'),
             'footer': document.querySelector('footer p')
         };
         
@@ -223,6 +248,45 @@ const i18n = {
                 } else {
                     element.textContent = this.t(key);
                 }
+            }
+        });
+        
+        // Atualizar seção do GitHub
+        this.updateGitHubSection();
+        
+        // Atualizar tooltips
+        this.updateTooltips();
+    },
+    
+    // Atualizar seção do GitHub
+    updateGitHubSection() {
+        const githubStar = document.querySelector('.github-section p:first-child');
+        const githubLink = document.querySelector('.github-link span');
+        const githubCompact = document.querySelector('.github-link-compact span');
+        const openSource = document.querySelector('.open-source');
+        
+        if (githubStar) githubStar.textContent = this.t('githubStar');
+        if (githubLink) githubLink.textContent = this.t('githubLink');
+        if (githubCompact) githubCompact.textContent = this.t('githubCompact');
+        if (openSource) openSource.textContent = this.t('openSource');
+    },
+    
+    // Atualizar tooltips
+    updateTooltips() {
+        const tooltips = {
+            'uploadBtnTitle': document.getElementById('uploadBtn'),
+            'downloadBtnTitle': document.getElementById('downloadBtn'),
+            'printBtnTitle': document.getElementById('printBtn'),
+            'copyBtnTitle': document.getElementById('copyBtn'),
+            'editorTitle': document.getElementById('markdownEditor'),
+            'githubLink': document.querySelector('.github-link-compact')
+        };
+        
+        Object.keys(tooltips).forEach(key => {
+            const element = tooltips[key];
+            if (element) {
+                const translation = this.t(key);
+                element.title = translation;
             }
         });
     },
@@ -244,24 +308,41 @@ const i18n = {
         this.createLanguageSelector();
     },
     
-    // Criar seletor de idioma
+    // Criar seletor de idioma com bandeiras
     createLanguageSelector() {
         const header = document.querySelector('header');
         const languageSelector = document.createElement('div');
         languageSelector.className = 'language-selector';
+        
+        const currentLang = this.getCurrentLanguage();
+        
         languageSelector.innerHTML = `
-            <select id="languageSelect">
-                <option value="en" ${this.getCurrentLanguage() === 'en' ? 'selected' : ''}>🇺🇸 English</option>
-                <option value="pt" ${this.getCurrentLanguage() === 'pt' ? 'selected' : ''}>🇧🇷 Português</option>
-                <option value="es" ${this.getCurrentLanguage() === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
-            </select>
+            <div class="flag-buttons">
+                <button class="flag-btn ${currentLang === 'en' ? 'active' : ''}" data-lang="en" title="English">
+                    <img src="https://flagcdn.com/w40/us.png" alt="English" class="flag-img">
+                </button>
+                <button class="flag-btn ${currentLang === 'pt' ? 'active' : ''}" data-lang="pt" title="Português">
+                    <img src="https://flagcdn.com/w40/br.png" alt="Português" class="flag-img">
+                </button>
+                <button class="flag-btn ${currentLang === 'es' ? 'active' : ''}" data-lang="es" title="Español">
+                    <img src="https://flagcdn.com/w40/es.png" alt="Español" class="flag-img">
+                </button>
+            </div>
         `;
         
         header.appendChild(languageSelector);
         
-        // Event listener para mudança de idioma
-        document.getElementById('languageSelect').addEventListener('change', (e) => {
-            this.setLanguage(e.target.value);
+        // Event listeners para os botões de bandeira
+        const flagButtons = languageSelector.querySelectorAll('.flag-btn');
+        flagButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = btn.dataset.lang;
+                this.setLanguage(lang);
+                
+                // Atualizar classes ativas
+                flagButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
         });
     }
 };

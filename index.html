@@ -6,6 +6,7 @@
     <title>Mark Print - Conversor Markdown para PDF</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -17,24 +18,41 @@
         <header>
             <h1>📄 Mark Print</h1>
             <p>Conversor Markdown para PDF com Preview</p>
+            <div class="header-actions">
+                <a href="https://github.com/souzara/mark-print" target="_blank" class="github-link-compact" title="Ver no GitHub">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
         </header>
         
         <main>
             <div class="editor-section">
                 <div class="editor-header">
                     <h3>📝 Editor Markdown</h3>
-                    <button id="loadExample" class="btn-secondary">Carregar Exemplo</button>
+                    <div class="editor-actions">
+                        <input type="file" id="fileUpload" accept=".md" style="display: none;">
+                        <button id="uploadBtn" class="btn-secondary" title="">
+                            <i class="fas fa-upload"></i>
+                        </button>
+                    </div>
                 </div>
-                <textarea id="markdownEditor" placeholder="Cole seu código markdown aqui..."></textarea>
+                <textarea id="markdownEditor" placeholder="Cole seu código markdown aqui..." title=""></textarea>
             </div>
             
             <div class="preview-section">
                 <div class="preview-header">
                     <h3>👁️ Preview</h3>
                     <div class="preview-actions">
-                        <button id="downloadBtn" class="btn-primary">📥 Download PDF</button>
-                        <button id="printBtn" class="btn-secondary">🖨️ Imprimir</button>
-                        <button id="copyBtn" class="btn-secondary">📋 Copiar HTML</button>
+                        <button id="downloadBtn" class="btn-primary" title="">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button id="printBtn" class="btn-secondary" title="">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button id="copyBtn" class="btn-secondary" title="">
+                            <i class="fas fa-copy"></i>
+                        </button>
                     </div>
                 </div>
                 <div id="preview" class="preview-content"></div>
@@ -43,6 +61,14 @@
         
         <footer>
             <p>Desenvolvido com ❤️ para facilitar a criação de PDFs a partir de Markdown</p>
+            <div class="github-section">
+                <p>⭐ Se você gostou, considere dar uma estrela no GitHub!</p>
+                <a href="https://github.com/souzara/mark-print" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i>
+                    <span>Ver no GitHub</span>
+                </a>
+                <p class="open-source">🔓 Open Source</p>
+            </div>
         </footer>
     </div>
     

@@ -20,7 +20,8 @@ const preview = document.getElementById('preview');
 const downloadBtn = document.getElementById('downloadBtn');
 const printBtn = document.getElementById('printBtn');
 const copyBtn = document.getElementById('copyBtn');
-const loadExampleBtn = document.getElementById('loadExample');
+const uploadBtn = document.getElementById('uploadBtn');
+const fileUpload = document.getElementById('fileUpload');
 
 // Função para gerar exemplo de markdown baseado no idioma
 function getExampleMarkdown() {
@@ -266,12 +267,52 @@ function loadExample() {
     renderMarkdown();
 }
 
+// Função para upload de arquivo
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // Verificar se é um arquivo .md
+    if (!file.name.toLowerCase().endsWith('.md')) {
+        alert('Por favor, selecione apenas arquivos .md');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        markdownEditor.value = e.target.result;
+        renderMarkdown();
+        
+        // Feedback visual
+        const originalText = uploadBtn.innerHTML;
+        uploadBtn.innerHTML = '<i class="fas fa-check"></i><span>Carregado!</span>';
+        uploadBtn.style.background = '#28a745';
+        
+        setTimeout(() => {
+            uploadBtn.innerHTML = originalText;
+            uploadBtn.style.background = '#343a40';
+        }, 2000);
+    };
+    
+    reader.onerror = function() {
+        alert('Erro ao ler o arquivo. Tente novamente.');
+    };
+    
+    reader.readAsText(file);
+}
+
+// Função para abrir seletor de arquivo
+function openFileSelector() {
+    fileUpload.click();
+}
+
 // Event listeners
 markdownEditor.addEventListener('input', renderMarkdown);
 downloadBtn.addEventListener('click', downloadPDF);
 printBtn.addEventListener('click', printContent);
 copyBtn.addEventListener('click', copyHTML);
-loadExampleBtn.addEventListener('click', loadExample);
+uploadBtn.addEventListener('click', openFileSelector);
+fileUpload.addEventListener('change', handleFileUpload);
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
@@ -303,19 +344,19 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             copyHTML();
         }
+        
+        // Ctrl/Cmd + O para abrir arquivo
+        if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+            e.preventDefault();
+            openFileSelector();
+        }
     });
 });
 
-// Auto-save no localStorage
-markdownEditor.addEventListener('input', function() {
-    localStorage.setItem('mdprint_content', markdownEditor.value);
-});
 
-// Carregar conteúdo salvo
+
+// Carregar exemplo automaticamente
 window.addEventListener('load', function() {
-    const savedContent = localStorage.getItem('mdprint_content');
-    if (savedContent) {
-        markdownEditor.value = savedContent;
-        renderMarkdown();
-    }
+    // Carregar exemplo ao entrar na página
+    loadExample();
 }); 
