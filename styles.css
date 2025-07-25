@@ -490,16 +490,19 @@ footer {
     main {
         grid-template-columns: 1fr;
         gap: 20px;
-        height: auto;
+        height: calc(100vh - 180px);
+        min-height: 500px;
     }
     
     .editor-section, .preview-section {
         width: 100%;
+        height: calc(50vh - 100px);
+        min-height: 250px;
     }
     
     #markdownEditor, .preview-content {
-        height: 400px;
-        min-height: 300px;
+        height: calc(100% - 60px);
+        min-height: 200px;
     }
     
     /* Ajustes para botões de bandeira */
@@ -545,11 +548,18 @@ footer {
     
     main {
         gap: 15px;
+        height: calc(100vh - 150px);
+        min-height: 400px;
+    }
+    
+    .editor-section, .preview-section {
+        height: calc(50vh - 80px);
+        min-height: 200px;
     }
     
     #markdownEditor, .preview-content {
-        height: 300px;
-        min-height: 250px;
+        height: calc(100% - 50px);
+        min-height: 150px;
         padding: 15px;
     }
     
