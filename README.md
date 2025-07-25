@@ -18,6 +18,7 @@ A simple and elegant web application to convert Markdown documents to PDF with r
 - **Modern Interface**: Clean and professional design with gradients
 - **Smooth Animations**: Transitions and visual effects
 - **Dynamic Tooltips**: Contextual tips that change with language
+- **Toast Notifications**: Elegant feedback messages
 
 ### 🌍 Internationalization
 - **3 Languages**: Full support for English, Portuguese and Spanish
@@ -29,12 +30,20 @@ A simple and elegant web application to convert Markdown documents to PDF with r
 - **Responsive**: Works perfectly on desktop and mobile devices
 - **Keyboard Shortcuts**: Quick commands for all actions
 - **Auto Example**: Loads markdown example when opening the page
-- **Visual Feedback**: Visual confirmations for all actions
+- **Visual Feedback**: Toast notifications for all actions
 
 ### 🔗 GitHub Integration
 - **Compact Button**: Quick access in header
 - **Complete Section**: Highlight in footer with message
 - **Open Source**: Clear indication of project status
+
+### 📱 Progressive Web App (PWA)
+- **Installable**: Can be installed as a native app
+- **Offline Support**: Works without internet connection
+- **App-like Experience**: Full-screen mode without browser UI
+- **Background Sync**: Automatic data synchronization
+- **Push Notifications**: Ready for future notification features
+- **Fast Loading**: Cached resources for instant access
 
 ## 🚀 How to Use
 
@@ -43,6 +52,25 @@ A simple and elegant web application to convert Markdown documents to PDF with r
 3. **Upload** a .md file or **paste/type** your code
 4. **View** the result in the preview panel
 5. **Use the buttons** for PDF download, printing or copying HTML
+
+## 📱 PWA Installation
+
+### Desktop Installation
+1. **Open the application** in Chrome/Edge
+2. **Click the install button** in the address bar or header
+3. **Confirm installation** when prompted
+4. **Access from desktop** like a native app
+
+### Mobile Installation
+1. **Open the application** in mobile browser
+2. **Tap "Add to Home Screen"** when prompted
+3. **Or use browser menu** → "Add to Home Screen"
+4. **Launch from home screen** like any app
+
+### Offline Usage
+- **Works without internet** after first visit
+- **All features available** offline
+- **Automatic sync** when connection returns
 
 ## ⌨️ Keyboard Shortcuts
 
@@ -84,6 +112,8 @@ The application supports all standard Markdown elements:
 - **jsPDF**: PDF generation
 - **html2canvas**: Content capture for PDF
 - **Font Awesome**: Interface icons
+- **Service Worker**: Offline functionality and caching
+- **Web App Manifest**: PWA installation support
 - **i18n System**: Custom internationalization
 
 ## 📁 Project Structure
@@ -94,7 +124,10 @@ mdprint/
 ├── styles.css          # Application styles
 ├── script.js           # JavaScript functionality
 ├── i18n.js             # Internationalization system
-└── README.md           # This file
+├── manifest.json       # PWA manifest
+├── sw.js              # Service worker
+├── favicon.png        # App icon
+└── README.md          # This file
 ```
 
 ## 🎨 Design Features
@@ -105,6 +138,7 @@ mdprint/
 - **Clear Typography**: Readable font and visual hierarchy
 - **Harmonious Colors**: Consistent color palette
 - **Elegant Tooltips**: Contextual tips with animations
+- **Toast Notifications**: Non-intrusive feedback system
 
 ## 🔧 Customization
 
@@ -113,15 +147,17 @@ You can customize the application by editing:
 - **`styles.css`**: Colors, fonts and layout
 - **`script.js`**: Functionality and behavior
 - **`i18n.js`**: Translations and languages
+- **`manifest.json`**: PWA configuration
+- **`sw.js`**: Offline behavior and caching
 - **`index.html`**: Structure and content
 
 ## 📱 Compatibility
 
-- ✅ Chrome/Chromium
-- ✅ Firefox
-- ✅ Safari
-- ✅ Edge
-- ✅ Mobile devices
+- ✅ Chrome/Chromium (PWA support)
+- ✅ Firefox (PWA support)
+- ✅ Safari (PWA support)
+- ✅ Edge (PWA support)
+- ✅ Mobile devices (PWA installable)
 
 ## 🚀 How to Run
 
@@ -159,6 +195,26 @@ To test if color printing is working correctly:
 4. **Verify** that code blocks maintain their background colors and syntax highlighting
 
 **Note:** Make sure your browser and printer support color printing.
+
+## 📱 PWA Features
+
+### Installation Benefits
+- **Native app experience** without browser UI
+- **Quick access** from desktop/home screen
+- **Offline functionality** for productivity
+- **Automatic updates** when available
+
+### Offline Capabilities
+- **Full functionality** without internet
+- **Cached resources** for fast loading
+- **Background sync** when online
+- **Seamless experience** across devices
+
+### Performance
+- **Fast loading** with cached resources
+- **Reduced bandwidth** usage
+- **Improved reliability** with offline support
+- **Better user experience** with app-like interface
 
 ## ⭐ Contributing
 

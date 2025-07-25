@@ -52,6 +52,8 @@ const i18n = {
             generating: "⏳ Generating PDF...",
             fileLoaded: "File loaded successfully!",
             pdfGenerated: "PDF generated successfully!",
+            installApp: "Install App",
+            appInstalled: "App installed successfully!",
             
             // Mensagens
             addContentFirst: "Add content to the editor before generating PDF!",
@@ -113,6 +115,8 @@ const i18n = {
             generating: "⏳ Gerando PDF...",
             fileLoaded: "Arquivo carregado com sucesso!",
             pdfGenerated: "PDF gerado com sucesso!",
+            installApp: "Instalar App",
+            appInstalled: "App instalado com sucesso!",
             
             // Mensagens
             addContentFirst: "Adicione conteúdo no editor antes de gerar o PDF!",
@@ -173,6 +177,8 @@ const i18n = {
             generating: "⏳ Generando PDF...",
             fileLoaded: "¡Archivo cargado exitosamente!",
             pdfGenerated: "¡PDF generado exitosamente!",
+            installApp: "Instalar App",
+            appInstalled: "¡App instalado exitosamente!",
             
             // Mensagens
             addContentFirst: "¡Agrega contenido al editor antes de generar PDF!",
@@ -270,11 +276,13 @@ const i18n = {
         const githubLink = document.querySelector('.github-link span');
         const githubCompact = document.querySelector('.github-link-compact span');
         const openSource = document.querySelector('.open-source');
+        const installBtnSpan = document.getElementById('installBtn')?.querySelector('span');
         
         if (githubStar) githubStar.textContent = this.t('githubStar');
         if (githubLink) githubLink.textContent = this.t('githubLink');
         if (githubCompact) githubCompact.textContent = this.t('githubCompact');
         if (openSource) openSource.textContent = this.t('openSource');
+        if (installBtnSpan) installBtnSpan.textContent = this.t('installApp');
     },
     
     // Atualizar tooltips
@@ -285,7 +293,8 @@ const i18n = {
             'printBtnTitle': document.getElementById('printBtn'),
             'copyBtnTitle': document.getElementById('copyBtn'),
             'editorTitle': document.getElementById('markdownEditor'),
-            'githubLink': document.querySelector('.github-link-compact')
+            'githubLink': document.querySelector('.github-link-compact'),
+            'installApp': document.getElementById('installBtn')
         };
         
         Object.keys(tooltips).forEach(key => {

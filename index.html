@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark Print - Conversor Markdown para PDF</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Mark Print">
+    <link rel="apple-touch-icon" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,6 +26,10 @@
             <h1>📄 Mark Print</h1>
             <p>Conversor Markdown para PDF com Preview</p>
             <div class="header-actions">
+                <button id="installBtn" class="install-btn" style="display: none;" title="">
+                    <i class="fas fa-download"></i>
+                    <span></span>
+                </button>
                 <a href="https://github.com/souzara/mark-print" target="_blank" class="github-link-compact" title="Ver no GitHub">
                     <i class="fab fa-github"></i>
                     <span>GitHub</span>

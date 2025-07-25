@@ -22,6 +22,10 @@ const printBtn = document.getElementById('printBtn');
 const copyBtn = document.getElementById('copyBtn');
 const uploadBtn = document.getElementById('uploadBtn');
 const fileUpload = document.getElementById('fileUpload');
+const installBtn = document.getElementById('installBtn');
+
+// Variáveis para PWA
+let deferredPrompt;
 
 // Função para mostrar toast message
 function showToast(message, type = 'success') {
@@ -337,6 +341,31 @@ function openFileSelector() {
     fileUpload.click();
 }
 
+// Funções para PWA
+function showInstallPromotion() {
+    installBtn.style.display = 'inline-flex';
+}
+
+function hideInstallPromotion() {
+    installBtn.style.display = 'none';
+}
+
+function installPWA() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                showToast(i18n.t('appInstalled'), 'success');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+            hideInstallPromotion();
+        });
+    }
+}
+
 // Event listeners
 markdownEditor.addEventListener('input', renderMarkdown);
 downloadBtn.addEventListener('click', downloadPDF);
@@ -344,9 +373,34 @@ printBtn.addEventListener('click', printContent);
 copyBtn.addEventListener('click', copyHTML);
 uploadBtn.addEventListener('click', openFileSelector);
 fileUpload.addEventListener('change', handleFileUpload);
+installBtn.addEventListener('click', installPWA);
+
+// Event listeners para PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallPromotion();
+});
+
+window.addEventListener('appinstalled', () => {
+    hideInstallPromotion();
+    deferredPrompt = null;
+    showToast(i18n.t('appInstalled'), 'success');
+});
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    // Registrar service worker para PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(registration => {
+                console.log('Service Worker registered successfully:', registration);
+            })
+            .catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
+    }
+    
     // Inicializar sistema de internacionalização
     i18n.init();
     

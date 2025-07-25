@@ -188,6 +188,32 @@ header {
     font-size: 1rem;
 }
 
+.install-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.install-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.install-btn i {
+    font-size: 1rem;
+}
+
 /* Tooltip específico para o botão GitHub no header - sobrescreve o padrão */
 .github-link-compact[title]:hover::after {
     content: attr(title) !important;
