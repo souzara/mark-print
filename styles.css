@@ -1,4 +1,3 @@
-/* ===== RESET E BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -13,61 +12,54 @@ body {
     background: #f5f5f5;
     min-height: 100vh;
     color: #333;
-    font-size: 16px;
-    line-height: 1.6;
 }
 
 .container {
     width: 100%;
     margin: 0;
-    padding: 15px;
+    padding: 20px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ===== HEADER RESPONSIVO ===== */
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #333;
     position: relative;
-    padding: 10px 0;
 }
 
 header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
     text-shadow: none;
-    line-height: 1.2;
 }
 
 header p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     opacity: 0.9;
-    margin-bottom: 15px;
 }
 
-/* ===== SELEÇÃO DE IDIOMA RESPONSIVA ===== */
+/* Seletor de idioma com bandeiras */
 .language-selector {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 100;
+    top: 20px;
+    right: 20px;
 }
 
 .flag-buttons {
     display: flex;
-    gap: 3px;
+    gap: 4px;
     background: white;
-    padding: 4px;
+    padding: 6px;
     border-radius: 6px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .flag-btn {
-    width: 28px;
-    height: 20px;
+    width: 35px;
+    height: 25px;
     border: 2px solid #e9ecef;
     border-radius: 4px;
     background: white;
@@ -84,8 +76,8 @@ header p {
 
 .flag-btn:hover {
     border-color: #007acc;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 122, 204, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
 }
 
 .flag-btn.active {
@@ -99,10 +91,11 @@ header p {
     transform: translateY(0);
 }
 
+/* Estilos das imagens das bandeiras */
 .flag-img {
     width: 100%;
     height: 100%;
-    border-radius: 2px;
+    border-radius: 4px;
     object-fit: cover;
     border: 1px solid #ddd;
     transition: all 0.3s ease;
@@ -122,299 +115,17 @@ header p {
     opacity: 1;
 }
 
-/* ===== AÇÕES DO HEADER RESPONSIVAS ===== */
+/* Ações do header */
 .header-actions {
     position: absolute;
-    top: 50px;
-    right: 10px;
+    top: 70px;
+    right: 20px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .github-link-compact, .install-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: #333;
-    color: white;
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.github-link-compact:hover, .install-btn:hover {
-    background: #555;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.install-btn {
-    background: #28a745;
-}
-
-.install-btn:hover {
-    background: #218838;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
-}
-
-.github-link-compact i, .install-btn i {
-    font-size: 0.9rem;
-}
-
-/* ===== TOOLTIPS RESPONSIVOS ===== */
-[title] {
-    position: relative;
-}
-
-[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    z-index: 999999;
-    pointer-events: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    max-width: 150px;
-    word-wrap: break-word;
-}
-
-[title]:hover::before {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 4px solid transparent;
-    border-bottom-color: rgba(0, 0, 0, 0.9);
-    z-index: 999999;
-    pointer-events: none;
-}
-
-/* ===== MAIN LAYOUT RESPONSIVO ===== */
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
-    min-height: calc(100vh - 200px);
-}
-
-.editor-section, .preview-section {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    flex: 1;
-}
-
-.editor-header, .preview-header {
-    background: #f8f9fa;
-    padding: 15px;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.editor-header h3, .preview-header h3 {
-    color: #495057;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.preview-actions, .editor-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.btn-primary, .btn-secondary {
-    padding: 10px 14px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-width: 40px;
-    height: 40px;
-    position: relative;
-    background: #343a40;
-    color: white;
-}
-
-.btn-primary:hover, .btn-secondary:hover {
-    background: #212529;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(52, 58, 64, 0.3);
-}
-
-.btn-primary i, .btn-secondary i {
-    font-size: 1rem;
-}
-
-#markdownEditor {
-    width: 100%;
-    height: 300px;
-    min-height: 250px;
-    padding: 15px;
-    border: none;
-    resize: vertical;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    outline: none;
-    position: relative;
-    z-index: 1;
-}
-
-.preview-content {
-    height: 300px;
-    min-height: 250px;
-    padding: 15px;
-    overflow-y: auto;
-    line-height: 1.6;
-}
-
-/* ===== ESTILOS MARKDOWN ===== */
-.preview-content h1 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-}
-
-.preview-content h2 {
-    color: #34495e;
-    border-bottom: 1px solid #ecf0f1;
-    padding-bottom: 6px;
-    margin: 20px 0 12px 0;
-    font-size: 1.3rem;
-}
-
-.preview-content h3 {
-    color: #2c3e50;
-    margin: 15px 0 8px 0;
-    font-size: 1.1rem;
-}
-
-.preview-content p {
-    margin-bottom: 12px;
-}
-
-.preview-content code {
-    background: #f8f9fa;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    color: #e74c3c;
-    font-size: 0.9rem;
-}
-
-.preview-content pre {
-    background: #2d3748;
-    color: #e2e8f0;
-    padding: 15px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 12px 0;
-    position: relative;
-    font-size: 0.9rem;
-}
-
-.preview-content pre code {
-    background: none;
-    color: inherit;
-    padding: 0;
-}
-
-.preview-content blockquote {
-    border-left: 3px solid #3498db;
-    padding-left: 15px;
-    margin: 15px 0;
-    color: #7f8c8d;
-    font-style: italic;
-}
-
-.preview-content ul, .preview-content ol {
-    margin: 12px 0;
-    padding-left: 25px;
-}
-
-.preview-content li {
-    margin-bottom: 6px;
-}
-
-.preview-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-    font-size: 0.9rem;
-    overflow-x: auto;
-    display: block;
-}
-
-.preview-content th, .preview-content td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-    min-width: 100px;
-}
-
-.preview-content th {
-    background: #f8f9fa;
-    font-weight: bold;
-}
-
-/* ===== FOOTER RESPONSIVO ===== */
-footer {
-    text-align: center;
-    color: #666;
-    opacity: 0.8;
-    margin-top: auto;
-    padding: 15px 0;
-    font-size: 0.9rem;
-}
-
-.github-section {
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #e9ecef;
-}
-
-.github-section p {
-    margin: 6px 0;
-    font-size: 0.85rem;
-}
-
-.github-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -423,288 +134,69 @@ footer {
     text-decoration: none;
     padding: 8px 12px;
     border-radius: 6px;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    margin: 8px 0;
-    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
 }
 
-.github-link:hover {
+.github-link-compact:hover, .install-btn:hover {
     background: #555;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.github-link i {
+.install-btn {
+    background: #28a745;
+}
+
+.install-btn:hover {
+    background: #218838;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.github-link-compact i, .install-btn i {
     font-size: 1rem;
 }
 
-.open-source {
-    font-size: 0.75rem !important;
-    opacity: 0.7;
-    margin-top: 8px !important;
+/* Tooltips personalizados */
+[title] {
+    position: relative;
 }
 
-/* ===== RESPONSIVIDADE - TABLETS (768px - 1024px) ===== */
-@media (min-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-    
-    header h1 {
-        font-size: 2.2rem;
-    }
-    
-    header p {
-        font-size: 1.1rem;
-    }
-    
-    .language-selector {
-        top: 15px;
-        right: 15px;
-    }
-    
-    .flag-btn {
-        width: 32px;
-        height: 24px;
-    }
-    
-    .header-actions {
-        top: 60px;
-        right: 15px;
-        gap: 10px;
-    }
-    
-    .github-link-compact, .install-btn {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-    
-    main {
-        flex-direction: row;
-        gap: 25px;
-        height: calc(100vh - 250px);
-    }
-    
-    .editor-section, .preview-section {
-        flex: 1;
-    }
-    
-    .editor-header, .preview-header {
-        padding: 18px;
-    }
-    
-    .editor-header h3, .preview-header h3 {
-        font-size: 1.2rem;
-    }
-    
-    #markdownEditor, .preview-content {
-        height: calc(100vh - 350px);
-        min-height: 400px;
-        padding: 18px;
-    }
-    
-    .btn-primary, .btn-secondary {
-        padding: 12px 16px;
-        font-size: 1rem;
-        min-width: 44px;
-        height: 44px;
-    }
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 999999;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 200px;
+    word-wrap: break-word;
 }
 
-/* ===== RESPONSIVIDADE - DESKTOP (1024px+) ===== */
-@media (min-width: 1024px) {
-    .container {
-        padding: 30px;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-    
-    header h1 {
-        font-size: 2.5rem;
-    }
-    
-    .language-selector {
-        top: 20px;
-        right: 20px;
-    }
-    
-    .flag-btn {
-        width: 35px;
-        height: 25px;
-    }
-    
-    .header-actions {
-        top: 70px;
-        right: 20px;
-    }
-    
-    main {
-        gap: 30px;
-        height: calc(100vh - 300px);
-    }
-    
-    .editor-header, .preview-header {
-        padding: 20px;
-    }
-    
-    .editor-header h3, .preview-header h3 {
-        font-size: 1.3rem;
-    }
-    
-    #markdownEditor, .preview-content {
-        height: calc(100vh - 400px);
-        min-height: 500px;
-        padding: 20px;
-    }
-    
-    .preview-content h1 {
-        font-size: 1.8rem;
-    }
-    
-    .preview-content h2 {
-        font-size: 1.5rem;
-    }
-    
-    .preview-content h3 {
-        font-size: 1.2rem;
-    }
-    
-    .preview-content table {
-        font-size: 1rem;
-        display: table;
-    }
-    
-    .preview-content th, .preview-content td {
-        padding: 12px;
-    }
+[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    pointer-events: none;
 }
 
-/* ===== RESPONSIVIDADE - CELULARES PEQUENOS (320px - 480px) ===== */
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-    
-    header h1 {
-        font-size: 1.5rem;
-        margin-bottom: 6px;
-    }
-    
-    header p {
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-    }
-    
-    .language-selector {
-        top: 8px;
-        right: 8px;
-    }
-    
-    .flag-btn {
-        width: 24px;
-        height: 18px;
-    }
-    
-    .flag-buttons {
-        padding: 3px;
-        gap: 2px;
-    }
-    
-    .header-actions {
-        top: 45px;
-        right: 8px;
-        gap: 6px;
-    }
-    
-    .github-link-compact, .install-btn {
-        padding: 5px 8px;
-        font-size: 0.75rem;
-        gap: 3px;
-    }
-    
-    .github-link-compact i, .install-btn i {
-        font-size: 0.8rem;
-    }
-    
-    main {
-        gap: 15px;
-        margin-bottom: 15px;
-    }
-    
-    .editor-header, .preview-header {
-        padding: 12px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .editor-header h3, .preview-header h3 {
-        font-size: 1rem;
-    }
-    
-    .preview-actions, .editor-actions {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .btn-primary, .btn-secondary {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-        min-width: 36px;
-        height: 36px;
-        gap: 4px;
-    }
-    
-    .btn-primary i, .btn-secondary i {
-        font-size: 0.9rem;
-    }
-    
-    #markdownEditor, .preview-content {
-        height: 250px;
-        min-height: 200px;
-        padding: 12px;
-        font-size: 13px;
-    }
-    
-    .preview-content h1 {
-        font-size: 1.3rem;
-    }
-    
-    .preview-content h2 {
-        font-size: 1.1rem;
-    }
-    
-    .preview-content h3 {
-        font-size: 1rem;
-    }
-    
-    .preview-content pre {
-        padding: 10px;
-        font-size: 0.8rem;
-    }
-    
-    .preview-content table {
-        font-size: 0.8rem;
-    }
-    
-    .preview-content th, .preview-content td {
-        padding: 6px;
-        min-width: 80px;
-    }
-    
-    footer {
-        padding: 12px 0;
-        font-size: 0.8rem;
-    }
-    
-    .github-link {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-}
-
-/* ===== TOOLTIPS ESPECÍFICOS PARA HEADER ===== */
+/* Tooltip específico para botões do header */
 .github-link-compact[title]:hover::after,
 .install-btn[title]:hover::after {
     content: attr(title) !important;
@@ -714,16 +206,16 @@ footer {
     transform: translateY(-50%) !important;
     background: rgba(0, 0, 0, 0.9) !important;
     color: white !important;
-    padding: 6px 10px !important;
-    border-radius: 4px !important;
-    font-size: 0.75rem !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 0.8rem !important;
     white-space: nowrap !important;
     z-index: 99999999 !important;
     pointer-events: none !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-    max-width: 120px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    max-width: 200px !important;
     word-wrap: break-word !important;
-    margin-right: 8px !important;
+    margin-right: 10px !important;
     bottom: auto !important;
     left: auto !important;
 }
@@ -735,17 +227,374 @@ footer {
     right: 100% !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    border: 4px solid transparent !important;
+    border: 6px solid transparent !important;
     border-left-color: rgba(0, 0, 0, 0.9) !important;
     z-index: 99999999 !important;
     pointer-events: none !important;
-    margin-right: 2px !important;
+    margin-right: 4px !important;
     bottom: auto !important;
     left: auto !important;
     border-bottom-color: transparent !important;
 }
 
-/* ===== ESTILOS PARA IMPRESSÃO ===== */
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    height: calc(100vh - 200px);
+}
+
+.editor-section, .preview-section {
+    background: white;
+    border-radius: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+}
+
+.editor-header, .preview-header {
+    background: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.editor-header h3, .preview-header h3 {
+    color: #495057;
+    font-size: 1.2rem;
+}
+
+.preview-actions, .editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 44px;
+    height: 44px;
+    position: relative;
+}
+
+.btn-primary i, .btn-secondary i {
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: #343a40;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #212529;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 58, 64, 0.4);
+}
+
+.btn-secondary {
+    background: #343a40;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #212529;
+    transform: translateY(-2px);
+}
+
+#markdownEditor {
+    width: 100%;
+    height: calc(100vh - 200px);
+    min-height: 500px;
+    padding: 20px;
+    border: none;
+    resize: none;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+    position: relative;
+    z-index: 1;
+}
+
+.preview-content {
+    height: calc(100vh - 200px);
+    min-height: 500px;
+    padding: 20px;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+/* Estilos para o conteúdo markdown renderizado */
+.preview-content h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.preview-content h2 {
+    color: #34495e;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 8px;
+    margin: 25px 0 15px 0;
+}
+
+.preview-content h3 {
+    color: #2c3e50;
+    margin: 20px 0 10px 0;
+}
+
+.preview-content p {
+    margin-bottom: 15px;
+}
+
+.preview-content code {
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 0;
+    font-family: 'Courier New', monospace;
+    color: #e74c3c;
+}
+
+.preview-content pre {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 0;
+    overflow-x: auto;
+    margin: 15px 0;
+    position: relative;
+}
+
+.preview-content pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+.preview-content blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 20px;
+    margin: 20px 0;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.preview-content ul, .preview-content ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+.preview-content li {
+    margin-bottom: 8px;
+}
+
+.preview-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.preview-content th, .preview-content td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.preview-content th {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    color: #666;
+    opacity: 0.8;
+    margin-top: auto;
+    padding: 20px 0;
+}
+
+.github-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.github-section p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.github-link:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.github-link i {
+    font-size: 1.2rem;
+}
+
+.open-source {
+    font-size: 0.8rem !important;
+    opacity: 0.7;
+    margin-top: 10px !important;
+}
+
+/* Responsividade - Tablet e Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    /* Layout vertical para tablet/mobile */
+    main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        height: auto;
+    }
+    
+    .editor-section, .preview-section {
+        width: 100%;
+    }
+    
+    #markdownEditor, .preview-content {
+        height: 400px;
+        min-height: 300px;
+    }
+    
+    /* Ajustes para botões de bandeira */
+    .language-selector {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .header-actions {
+        top: 60px;
+        right: 15px;
+    }
+    
+    .flag-btn {
+        width: 30px;
+        height: 22px;
+    }
+    
+    .flag-buttons {
+        padding: 4px;
+        gap: 3px;
+    }
+    
+    .github-link-compact, .install-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsividade - Mobile pequeno */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    main {
+        gap: 15px;
+    }
+    
+    #markdownEditor, .preview-content {
+        height: 300px;
+        min-height: 250px;
+        padding: 15px;
+    }
+    
+    .editor-header, .preview-header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .preview-actions, .editor-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        min-width: 40px;
+        height: 40px;
+    }
+    
+    .language-selector {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .header-actions {
+        top: 50px;
+        right: 10px;
+        gap: 8px;
+    }
+    
+    .flag-btn {
+        width: 25px;
+        height: 18px;
+    }
+    
+    .github-link-compact, .install-btn {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Estilos para impressão */
 @media print {
     body {
         background: white;
@@ -771,7 +620,7 @@ footer {
     }
     
     main {
-        display: block;
+        grid-template-columns: 1fr;
         gap: 0;
     }
     
@@ -824,7 +673,7 @@ footer {
     .hljs-strong { font-weight: bold !important; }
 }
 
-/* ===== ANIMAÇÕES ===== */
+/* Animações */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -834,48 +683,21 @@ footer {
     animation: fadeIn 0.6s ease-out;
 }
 
-/* ===== SCROLLBAR PERSONALIZADA ===== */
+/* Scrollbar personalizada */
 .preview-content::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .preview-content::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 3px;
+    border-radius: 0;
 }
 
 .preview-content::-webkit-scrollbar-thumb {
     background: #c1c1c1;
-    border-radius: 3px;
+    border-radius: 0;
 }
 
 .preview-content::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
-}
-
-/* ===== MELHORIAS DE ACESSIBILIDADE ===== */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* ===== MELHORIAS PARA TELA TÁTIL ===== */
-@media (hover: none) and (pointer: coarse) {
-    .btn-primary, .btn-secondary {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    .flag-btn {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    .github-link-compact, .install-btn {
-        min-height: 44px;
-        padding: 12px 16px;
-    }
 } 
