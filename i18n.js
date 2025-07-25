@@ -50,6 +50,8 @@ const i18n = {
             // Botões de feedback
             copied: "✅ Copied!",
             generating: "⏳ Generating PDF...",
+            fileLoaded: "File loaded successfully!",
+            pdfGenerated: "PDF generated successfully!",
             
             // Mensagens
             addContentFirst: "Add content to the editor before generating PDF!",
@@ -109,6 +111,8 @@ const i18n = {
             // Botões de feedback
             copied: "✅ Copiado!",
             generating: "⏳ Gerando PDF...",
+            fileLoaded: "Arquivo carregado com sucesso!",
+            pdfGenerated: "PDF gerado com sucesso!",
             
             // Mensagens
             addContentFirst: "Adicione conteúdo no editor antes de gerar o PDF!",
@@ -167,6 +171,8 @@ const i18n = {
             // Botões de feedback
             copied: "✅ ¡Copiado!",
             generating: "⏳ Generando PDF...",
+            fileLoaded: "¡Archivo cargado exitosamente!",
+            pdfGenerated: "¡PDF generado exitosamente!",
             
             // Mensagens
             addContentFirst: "¡Agrega contenido al editor antes de generar PDF!",

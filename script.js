@@ -23,6 +23,57 @@ const copyBtn = document.getElementById('copyBtn');
 const uploadBtn = document.getElementById('uploadBtn');
 const fileUpload = document.getElementById('fileUpload');
 
+// Função para mostrar toast message
+function showToast(message, type = 'success') {
+    // Remover toast existente se houver
+    const existingToast = document.querySelector('.toast-message');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    // Criar toast
+    const toast = document.createElement('div');
+    toast.className = `toast-message toast-${type}`;
+    toast.textContent = message;
+    
+    // Estilos do toast
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#28a745' : '#dc3545'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99999999;
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Animar entrada
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 300);
+    }, 3000);
+}
+
 // Função para gerar exemplo de markdown baseado no idioma
 function getExampleMarkdown() {
     const lang = i18n.getCurrentLanguage();
@@ -119,9 +170,8 @@ function downloadPDF() {
         return;
     }
     
-    // Mostrar loading
-    downloadBtn.innerHTML = i18n.t('generating');
-    downloadBtn.disabled = true;
+    // Mostrar toast de loading
+    showToast(i18n.t('generating'), 'success');
     
     try {
         // Clonar o preview atual com todos os estilos
@@ -201,22 +251,17 @@ function downloadPDF() {
             const fileName = `documento_${new Date().toISOString().slice(0, 10)}.pdf`;
             pdf.save(fileName);
             
-            // Restaurar botão
-            downloadBtn.innerHTML = i18n.t('downloadBtn');
-            downloadBtn.disabled = false;
+            // Mostrar toast de sucesso
+            showToast(i18n.t('pdfGenerated'), 'success');
             
         }).catch(error => {
             console.error('Erro ao gerar PDF:', error);
-            alert(i18n.t('errorGenerating'));
-            downloadBtn.innerHTML = i18n.t('downloadBtn');
-            downloadBtn.disabled = false;
+            showToast(i18n.t('errorGenerating'), 'error');
         });
         
     } catch (error) {
         console.error('Erro ao processar markdown:', error);
-        alert(i18n.t('errorProcessing'));
-        downloadBtn.innerHTML = i18n.t('downloadBtn');
-        downloadBtn.disabled = false;
+        showToast(i18n.t('errorProcessing'), 'error');
     }
 }
 
@@ -243,21 +288,14 @@ function copyHTML() {
     try {
         const htmlContent = marked.parse(markdownText);
         navigator.clipboard.writeText(htmlContent).then(() => {
-            // Feedback visual
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = i18n.t('copied');
-            copyBtn.style.background = '#28a745';
-            
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-                copyBtn.style.background = '#6c757d';
-            }, 2000);
+            // Mostrar toast de sucesso
+            showToast(i18n.t('copied'), 'success');
         }).catch(err => {
             console.error('Erro ao copiar:', err);
-            alert(i18n.t('errorCopying'));
+            showToast(i18n.t('errorCopying'), 'error');
         });
     } catch (error) {
-        alert(i18n.t('errorGeneratingHTML') + error.message);
+        showToast(i18n.t('errorGeneratingHTML') + error.message, 'error');
     }
 }
 
@@ -283,19 +321,12 @@ function handleFileUpload(event) {
         markdownEditor.value = e.target.result;
         renderMarkdown();
         
-        // Feedback visual
-        const originalText = uploadBtn.innerHTML;
-        uploadBtn.innerHTML = '<i class="fas fa-check"></i><span>Carregado!</span>';
-        uploadBtn.style.background = '#28a745';
-        
-        setTimeout(() => {
-            uploadBtn.innerHTML = originalText;
-            uploadBtn.style.background = '#343a40';
-        }, 2000);
+        // Mostrar toast de sucesso
+        showToast(i18n.t('fileLoaded'), 'success');
     };
     
     reader.onerror = function() {
-        alert('Erro ao ler o arquivo. Tente novamente.');
+        showToast('Erro ao ler o arquivo. Tente novamente.', 'error');
     };
     
     reader.readAsText(file);
