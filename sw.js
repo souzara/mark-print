@@ -2,16 +2,16 @@ const CACHE_NAME = 'mark-print-v1.0.0';
 const urlsToCache = [
   './',
   './index.html',
-  './styles.css',
   './script.js',
   './i18n.js',
   './favicon.png',
   'https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js',
+  './styles.css',
   'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
 ];
 
 // Install event - cache resources
