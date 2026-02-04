@@ -1,6 +1,10 @@
 // Configuração do Marked para renderização do markdown
 marked.setOptions({
     highlight: function(code, lang) {
+        // Blocos mermaid não são destacados como código
+        if (lang === 'mermaid') {
+            return code;
+        }
         if (lang && hljs.getLanguage(lang)) {
             try {
                 return hljs.highlight(code, { language: lang }).value;
@@ -13,6 +17,36 @@ marked.setOptions({
     breaks: true,
     gfm: true
 });
+
+// Inicializar Mermaid (sem auto-run; controlamos manualmente) — tema moderno
+if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'loose',
+        theme: 'base',
+        themeVariables: {
+            fontFamily: '"Segoe UI", system-ui, -apple-system, sans-serif',
+            fontSize: '15px',
+            primaryColor: '#e0f2fe',
+            primaryTextColor: '#0c4a6e',
+            primaryBorderColor: '#0ea5e9',
+            secondaryColor: '#f0f9ff',
+            secondaryTextColor: '#0369a1',
+            secondaryBorderColor: '#38bdf8',
+            tertiaryColor: '#f8fafc',
+            tertiaryTextColor: '#334155',
+            lineColor: '#64748b',
+            textColor: '#334155',
+            mainBkg: '#e0f2fe',
+            nodeBorder: '#0ea5e9',
+            clusterBkg: '#f1f5f9',
+            titleColor: '#0f172a',
+            edgeLabelBackground: '#f8fafc',
+            nodeTextColor: '#0c4a6e',
+            background: '#ffffff'
+        }
+    });
+}
 
 // Elementos do DOM
 const markdownEditor = document.getElementById('markdownEditor');
@@ -145,6 +179,27 @@ ${i18n.t('exampleSource')}
 `;
 }
 
+// Função para renderizar diagramas Mermaid no preview
+function renderMermaidBlocks(container) {
+    if (typeof mermaid === 'undefined') return;
+    const mermaidBlocks = container.querySelectorAll('pre code.language-mermaid');
+    mermaidBlocks.forEach((block) => {
+        const pre = block.closest('pre');
+        if (!pre) return;
+        const source = block.textContent.trim();
+        const div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = source;
+        pre.parentNode.replaceChild(div, pre);
+    });
+    const mermaidNodes = container.querySelectorAll('.mermaid');
+    if (mermaidNodes.length) {
+        mermaid.run({ nodes: mermaidNodes }).catch((err) => {
+            console.error('Erro ao renderizar Mermaid:', err);
+        });
+    }
+}
+
 // Função para renderizar markdown
 function renderMarkdown() {
     const markdownText = markdownEditor.value;
@@ -157,7 +212,10 @@ function renderMarkdown() {
         const htmlContent = marked.parse(markdownText);
         preview.innerHTML = htmlContent;
         
-        // Aplicar highlight.js aos blocos de código
+        // Renderizar blocos Mermaid antes do highlight (substitui os pre/code)
+        renderMermaidBlocks(preview);
+        
+        // Aplicar highlight.js aos blocos de código restantes
         preview.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightElement(block);
         });

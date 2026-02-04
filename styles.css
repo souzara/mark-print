@@ -386,6 +386,17 @@ main {
 .preview-content pre code {
     background: none;
     color: inherit;
+}
+
+.preview-content .mermaid {
+    margin: 1.5em 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.preview-content .mermaid svg {
+    max-width: 100%;
+    height: auto;
     padding: 0;
 }
 
