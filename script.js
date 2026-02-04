@@ -112,66 +112,60 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// Função para gerar exemplo de markdown baseado no idioma
+// Função para gerar exemplo de markdown baseado no idioma (showcase do Mark Print + todos os recursos)
 function getExampleMarkdown() {
-    const lang = i18n.getCurrentLanguage();
-    
     return `${i18n.t('exampleTitle')}
 
-${i18n.t('exampleUpdate')}
+${i18n.t('exampleSubtitle')}
 
-\`\`\`bash
-apt update && apt upgrade -y
+${i18n.t('exampleFeaturesTitle')}
+
+- ${i18n.t('exampleFeature1')}
+- ${i18n.t('exampleFeature2')}
+- ${i18n.t('exampleFeature3')}
+- ${i18n.t('exampleFeature4')}
+- ${i18n.t('exampleFeature5')}
+- ${i18n.t('exampleFeature6')}
+
+${i18n.t('exampleHowTitle')}
+
+1. ${i18n.t('exampleStep1')}
+2. ${i18n.t('exampleStep2')}
+3. ${i18n.t('exampleStep3')}
+
+### Bloco de código
+
+${i18n.t('exampleCodeComment')}:
+
+\`\`\`javascript
+// Exemplo de código com destaque de sintaxe
+function hello() {
+  return "Olá, Mark Print!";
+}
 \`\`\`
 
-${i18n.t('exampleInstallCurl')}
+### Citação
 
-\`\`\`bash
-apt install -y curl
+> ${i18n.t('exampleTip')}
+
+${i18n.t('exampleShortcutsTitle')}
+
+| Atalho | Ação |
+|--------|------|
+| \`Ctrl\` + \`Enter\` | Baixar PDF |
+| \`Ctrl\` + \`Shift\` + \`P\` | Imprimir |
+| \`Ctrl\` + \`Shift\` + \`C\` | Copiar HTML |
+| \`Ctrl\` + \`O\` | Abrir arquivo .md |
+
+${i18n.t('exampleWorkflowTitle')}
+
+\`\`\`mermaid
+flowchart LR
+    A[Editor Markdown] --> B[Preview]
+    B --> C[Download PDF]
+    B --> D[Imprimir]
+    B --> E[Copiar HTML]
 \`\`\`
-
-${i18n.t('exampleDownload')}
-
-### ${i18n.t('exampleLatest')}:
-
-\`\`\`bash
-curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin
-\`\`\`
-
-### ${i18n.t('exampleSpecific')}:
-
-\`\`\`bash
-curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version [versão]
-\`\`\`
-
-${i18n.t('examplePath')}
-
-\`\`\`bash
-export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
-\`\`\`
-
-${i18n.t('exampleTest')}
-
-\`\`\`bash
-dotnet --version
-dotnet tool list --global
-\`\`\`
-
-> ${i18n.t('exampleNote')}
-
-### ${i18n.t('exampleCommands')}:
-
-1. **Atualizar sistema**: \`apt update && apt upgrade -y\`
-2. **Instalar curl**: \`apt install -y curl\`
-3. **Instalar .NET**: \`curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin\`
-
-### ${i18n.t('exampleTable')}:
-
-| Versão | Status | Data de Lançamento |
-|--------|--------|-------------------|
-| .NET 8.0 | ✅ Suportada | Novembro 2023 |
-| .NET 7.0 | ✅ Suportada | Novembro 2022 |
-| .NET 6.0 | ✅ Suportada | Novembro 2021 |
 
 ---
 

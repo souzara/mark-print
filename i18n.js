@@ -72,19 +72,25 @@ const i18n = {
             githubCompact: "GitHub",
             openSource: "🔓 Open Source",
             
-            // Exemplo de markdown
-            exampleTitle: "# .NET SDK Installation and dump collection on Linux",
-            exampleUpdate: "## Update system packages",
-            exampleInstallCurl: "## Install `curl`, necessary to download .NET",
-            exampleDownload: "## Download and install .NET SDK",
-            exampleLatest: "### For **latest** SDK version:",
-            exampleSpecific: "### For **specific** SDK version:",
-            examplePath: "## Configure `PATH` to recognize .NET",
-            exampleTest: "## Test if installation was successful",
-            exampleNote: "> **Note:** This is an example of technical documentation in markdown.",
-            exampleCommands: "### List of important commands:",
-            exampleTable: "### Supported versions table:",
-            exampleSource: "**Source:** Official Microsoft documentation"
+            // Exemplo de markdown (Mark Print showcase)
+            exampleTitle: "# Mark Print",
+            exampleSubtitle: "Convert Markdown to PDF with live preview. Write in the editor and see the result instantly.",
+            exampleFeaturesTitle: "## Features",
+            exampleFeature1: "**Live preview** — See the rendered result as you type.",
+            exampleFeature2: "**PDF download** — Generate a PDF from your document with one click.",
+            exampleFeature3: "**Print** — Send directly to the printer.",
+            exampleFeature4: "**Copy HTML** — Copy the generated HTML.",
+            exampleFeature5: "**Mermaid diagrams** — Flowcharts, sequence diagrams and more.",
+            exampleFeature6: "**Syntax highlighting** — Code blocks with language support.",
+            exampleHowTitle: "## How to use",
+            exampleStep1: "Type or paste your Markdown in the left panel.",
+            exampleStep2: "Use the buttons above the preview: **Download PDF**, **Print** or **Copy HTML**.",
+            exampleStep3: "You can also load a `.md` file from your computer.",
+            exampleCodeComment: "Example: your document can contain code blocks with syntax highlighting",
+            exampleShortcutsTitle: "## Keyboard shortcuts",
+            exampleTip: "**Tip:** This default text demonstrates headings, lists, code, tables, blockquotes and Mermaid. Replace it with your own content!",
+            exampleWorkflowTitle: "## Mark Print workflow",
+            exampleSource: "**Project:** [Mark Print on GitHub](https://github.com/souzara/mark-print)"
         },
         
         pt: {
@@ -135,19 +141,25 @@ const i18n = {
             githubCompact: "GitHub",
             openSource: "🔓 Open Source",
             
-            // Exemplo de markdown
-            exampleTitle: "# Instalação do .NET SDK e coleta de dump no Linux",
-            exampleUpdate: "## Atualiza os pacotes do sistema",
-            exampleInstallCurl: "## Instala o `curl`, necessário para baixar o .NET",
-            exampleDownload: "## Baixa e instala o .NET SDK",
-            exampleLatest: "### Para **última versão** do SDK:",
-            exampleSpecific: "### Para **versão específica** do SDK:",
-            examplePath: "## Configura o `PATH` para reconhecer o .NET",
-            exampleTest: "## Testa se a instalação foi bem-sucedida",
-            exampleNote: "> **Nota:** Este é um exemplo de documentação técnica em markdown.",
-            exampleCommands: "### Lista de comandos importantes:",
-            exampleTable: "### Tabela de versões suportadas:",
-            exampleSource: "**Fonte:** Documentação oficial da Microsoft"
+            // Exemplo de markdown (Mark Print showcase)
+            exampleTitle: "# Mark Print",
+            exampleSubtitle: "Conversor de Markdown para PDF com preview em tempo real. Escreva no editor e veja o resultado na hora.",
+            exampleFeaturesTitle: "## Recursos",
+            exampleFeature1: "**Preview em tempo real** — Veja o resultado renderizado enquanto digita.",
+            exampleFeature2: "**Download em PDF** — Gere um PDF do seu documento com um clique.",
+            exampleFeature3: "**Imprimir** — Envie direto para a impressora.",
+            exampleFeature4: "**Copiar HTML** — Copie o HTML gerado.",
+            exampleFeature5: "**Diagramas Mermaid** — Fluxogramas, diagramas de sequência e mais.",
+            exampleFeature6: "**Destaque de sintaxe** — Blocos de código com suporte a linguagens.",
+            exampleHowTitle: "## Como usar",
+            exampleStep1: "Digite ou cole seu Markdown no painel esquerdo.",
+            exampleStep2: "Use os botões acima do preview: **Baixar PDF**, **Imprimir** ou **Copiar HTML**.",
+            exampleStep3: "Você também pode carregar um arquivo `.md` do seu computador.",
+            exampleCodeComment: "Exemplo: seu documento pode ter blocos de código com destaque de sintaxe",
+            exampleShortcutsTitle: "## Atalhos de teclado",
+            exampleTip: "**Dica:** Este texto padrão mostra títulos, listas, código, tabelas, citações e Mermaid. Substitua pelo seu conteúdo!",
+            exampleWorkflowTitle: "## Fluxo do Mark Print",
+            exampleSource: "**Projeto:** [Mark Print no GitHub](https://github.com/souzara/mark-print)"
         },
         
         es: {
@@ -197,19 +209,25 @@ const i18n = {
             githubCompact: "GitHub",
             openSource: "🔓 Open Source",
             
-            // Exemplo de markdown
-            exampleTitle: "# Instalación del SDK de .NET y recolección de dump en Linux",
-            exampleUpdate: "## Actualiza los paquetes del sistema",
-            exampleInstallCurl: "## Instala `curl`, necesario para descargar .NET",
-            exampleDownload: "## Descarga e instala el SDK de .NET",
-            exampleLatest: "### Para la **última versión** del SDK:",
-            exampleSpecific: "### Para una **versión específica** del SDK:",
-            examplePath: "## Configura el `PATH` para reconocer .NET",
-            exampleTest: "## Prueba si la instalación fue exitosa",
-            exampleNote: "> **Nota:** Este es un ejemplo de documentación técnica en markdown.",
-            exampleCommands: "### Lista de comandos importantes:",
-            exampleTable: "### Tabla de versiones soportadas:",
-            exampleSource: "**Fuente:** Documentación oficial de Microsoft"
+            // Exemplo de markdown (Mark Print showcase)
+            exampleTitle: "# Mark Print",
+            exampleSubtitle: "Conversor de Markdown a PDF con vista previa en tiempo real. Escribe en el editor y ve el resultado al instante.",
+            exampleFeaturesTitle: "## Recursos",
+            exampleFeature1: "**Vista previa en tiempo real** — Ve el resultado renderizado mientras escribes.",
+            exampleFeature2: "**Descargar PDF** — Genera un PDF de tu documento con un clic.",
+            exampleFeature3: "**Imprimir** — Envía directo a la impresora.",
+            exampleFeature4: "**Copiar HTML** — Copia el HTML generado.",
+            exampleFeature5: "**Diagramas Mermaid** — Fluxogramas, diagramas de secuencia y más.",
+            exampleFeature6: "**Resaltado de sintaxis** — Bloques de código con soporte de lenguajes.",
+            exampleHowTitle: "## Cómo usar",
+            exampleStep1: "Escribe o pega tu Markdown en el panel izquierdo.",
+            exampleStep2: "Usa los botones sobre la vista previa: **Descargar PDF**, **Imprimir** o **Copiar HTML**.",
+            exampleStep3: "También puedes cargar un archivo `.md` desde tu computadora.",
+            exampleCodeComment: "Ejemplo: tu documento puede tener bloques de código con resaltado de sintaxis",
+            exampleShortcutsTitle: "## Atajos de teclado",
+            exampleTip: "**Consejo:** Este texto por defecto muestra títulos, listas, código, tablas, citas y Mermaid. ¡Sustitúyelo por tu contenido!",
+            exampleWorkflowTitle: "## Flujo de Mark Print",
+            exampleSource: "**Proyecto:** [Mark Print en GitHub](https://github.com/souzara/mark-print)"
         }
     },
     
