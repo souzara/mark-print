@@ -230,9 +230,9 @@ function downloadPDF() {
     showToast(i18n.t('generating'), 'success');
     
     try {
-        // Largura A3 em mm e em px (~96dpi) para o clone
-        const A3_WIDTH_MM = 297;
-        const cloneWidthPx = Math.round((A3_WIDTH_MM / 25.4) * 96);
+        // Largura A3 (297mm) — conteúdo quebra dentro dessa largura
+        const PAGE_WIDTH_MM = 297;
+        const cloneWidthPx = Math.round((PAGE_WIDTH_MM / 25.4) * 96);
 
         // Clonar o preview atual com todos os estilos
         const previewClone = preview.cloneNode(true);
@@ -241,6 +241,7 @@ function downloadPDF() {
             left: -9999px;
             top: 0;
             width: ${cloneWidthPx}px;
+            max-width: ${cloneWidthPx}px;
             background: white;
             padding: 40px;
             margin: 0;
@@ -249,28 +250,32 @@ function downloadPDF() {
             overflow: visible;
             height: auto;
             min-height: auto;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         `;
         
         // Aplicar estilos de impressão ao clone
         previewClone.style.fontSize = '9pt';
         
-        // Aplicar estilos específicos para impressão
+        // Estilos para caber na página: quebra de linha em tabelas, código e texto longo
         const style = document.createElement('style');
         style.textContent = `
+            .preview-content { box-sizing: border-box !important; }
             .preview-content h1 { font-size: 14pt !important; }
             .preview-content h2 { font-size: 12pt !important; }
             .preview-content h3 { font-size: 11pt !important; }
-            .preview-content pre { font-size: 8pt !important; }
-            .preview-content code { font-size: 8pt !important; }
-            .preview-content p, .preview-content li, .preview-content blockquote { font-size: 9pt !important; }
-            .preview-content table { font-size: 8pt !important; }
-            .preview-content th, .preview-content td { padding: 6px !important; }
+            .preview-content pre { font-size: 8pt !important; white-space: pre-wrap !important; word-wrap: break-word !important; overflow-wrap: break-word !important; max-width: 100% !important; }
+            .preview-content code { font-size: 8pt !important; word-break: break-word !important; }
+            .preview-content p, .preview-content li, .preview-content blockquote { font-size: 9pt !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }
+            .preview-content table { font-size: 8pt !important; table-layout: fixed !important; width: 100% !important; max-width: 100% !important; }
+            .preview-content th, .preview-content td { padding: 6px !important; word-wrap: break-word !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+            .preview-content .mermaid, .preview-content .mermaid svg { max-width: 100% !important; height: auto !important; }
         `;
         previewClone.appendChild(style);
         
         document.body.appendChild(previewClone);
         
-        // Usar html2canvas para capturar o conteúdo (largura A3)
+        // Usar html2canvas para capturar o conteúdo (largura fixa A4, conteúdo quebrado)
         html2canvas(previewClone, {
             scale: 2,
             useCORS: true,
@@ -283,8 +288,8 @@ function downloadPDF() {
             document.body.removeChild(previewClone);
             
             const { jsPDF } = window.jspdf;
-            // Single page: largura A3 (297mm), altura proporcional ao conteúdo (linguição)
-            const pdfWidthMm = A3_WIDTH_MM;
+            // Página A3 (297mm) de largura, altura proporcional ao conteúdo
+            const pdfWidthMm = PAGE_WIDTH_MM;
             const pdfHeightMm = (canvas.height / canvas.width) * pdfWidthMm;
             const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: [pdfWidthMm, pdfHeightMm] });
             
