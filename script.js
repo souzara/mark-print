@@ -230,13 +230,17 @@ function downloadPDF() {
     showToast(i18n.t('generating'), 'success');
     
     try {
+        // Largura A3 em mm e em px (~96dpi) para o clone
+        const A3_WIDTH_MM = 297;
+        const cloneWidthPx = Math.round((A3_WIDTH_MM / 25.4) * 96);
+
         // Clonar o preview atual com todos os estilos
         const previewClone = preview.cloneNode(true);
         previewClone.style.cssText = `
             position: absolute;
             left: -9999px;
             top: 0;
-            width: 800px;
+            width: ${cloneWidthPx}px;
             background: white;
             padding: 40px;
             margin: 0;
@@ -266,48 +270,30 @@ function downloadPDF() {
         
         document.body.appendChild(previewClone);
         
-        // Usar html2canvas para capturar o conteúdo
+        // Usar html2canvas para capturar o conteúdo (largura A3)
         html2canvas(previewClone, {
             scale: 2,
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#ffffff',
-            width: 800,
+            width: cloneWidthPx,
             height: previewClone.scrollHeight
         }).then(canvas => {
             // Remover elemento temporário
             document.body.removeChild(previewClone);
             
-            // Criar PDF
             const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
+            // Single page: largura A3 (297mm), altura proporcional ao conteúdo (linguição)
+            const pdfWidthMm = A3_WIDTH_MM;
+            const pdfHeightMm = (canvas.height / canvas.width) * pdfWidthMm;
+            const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: [pdfWidthMm, pdfHeightMm] });
             
             const imgData = canvas.toDataURL('image/png');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const imgWidth = pdfWidth;
-            const pageHeight = pdfHeight;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidthMm, pdfHeightMm);
             
-            // Adicionar primeira página
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-            
-            // Adicionar páginas adicionais se necessário
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-            
-            // Download do PDF
             const fileName = `documento_${new Date().toISOString().slice(0, 10)}.pdf`;
             pdf.save(fileName);
             
-            // Mostrar toast de sucesso
             showToast(i18n.t('pdfGenerated'), 'success');
             
         }).catch(error => {
