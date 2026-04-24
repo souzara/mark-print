@@ -54,12 +54,18 @@ const preview = document.getElementById('preview');
 const downloadBtn = document.getElementById('downloadBtn');
 const printBtn = document.getElementById('printBtn');
 const copyBtn = document.getElementById('copyBtn');
+const togglePreviewBtn = document.getElementById('togglePreviewBtn');
 const uploadBtn = document.getElementById('uploadBtn');
 const fileUpload = document.getElementById('fileUpload');
 const installBtn = document.getElementById('installBtn');
+const mainLayout = document.querySelector('main');
+const editorPreviewDivider = document.getElementById('editorPreviewDivider');
+const previewSection = document.querySelector('.preview-section');
+const previewModalBackdrop = document.getElementById('previewModalBackdrop');
 
 // Variáveis para PWA
 let deferredPrompt;
+let isPreviewMaximized = false;
 
 // Função para mostrar toast message
 function showToast(message, type = 'success') {
@@ -409,11 +415,127 @@ function installPWA() {
     }
 }
 
+function updatePreviewToggleButton() {
+    if (!togglePreviewBtn) {
+        return;
+    }
+
+    const icon = togglePreviewBtn.querySelector('i');
+    if (!icon) {
+        return;
+    }
+
+    const titleKey = isPreviewMaximized ? 'previewRestoreTitle' : 'previewMaximizeTitle';
+    togglePreviewBtn.title = i18n.t(titleKey);
+
+    icon.classList.remove('fa-expand', 'fa-compress');
+    icon.classList.add(isPreviewMaximized ? 'fa-compress' : 'fa-expand');
+}
+
+function togglePreviewMaximize() {
+    if (!mainLayout) {
+        return;
+    }
+
+    isPreviewMaximized = !isPreviewMaximized;
+    mainLayout.classList.toggle('preview-modal-open', isPreviewMaximized);
+    document.body.classList.toggle('preview-modal-open', isPreviewMaximized);
+    if (previewSection) {
+        previewSection.setAttribute('aria-modal', isPreviewMaximized ? 'true' : 'false');
+    }
+    updatePreviewToggleButton();
+}
+
+function setupResizablePanels() {
+    if (!mainLayout || !editorPreviewDivider) {
+        return;
+    }
+
+    const MIN_PANEL_WIDTH = 280;
+    const DIVIDER_WIDTH = 12;
+    const STORAGE_KEY = 'mark-print-editor-width';
+
+    function applyEditorWidth(width) {
+        const mainRect = mainLayout.getBoundingClientRect();
+        const maxEditorWidth = Math.max(MIN_PANEL_WIDTH, mainRect.width - MIN_PANEL_WIDTH - DIVIDER_WIDTH);
+        const safeWidth = Math.min(Math.max(width, MIN_PANEL_WIDTH), maxEditorWidth);
+
+        mainLayout.style.setProperty('--editor-width', `${safeWidth}px`);
+        localStorage.setItem(STORAGE_KEY, String(Math.round(safeWidth)));
+    }
+
+    function restoreSavedWidth() {
+        const savedWidth = Number(localStorage.getItem(STORAGE_KEY));
+
+        if (!Number.isFinite(savedWidth) || window.innerWidth <= 768) {
+            mainLayout.style.setProperty('--editor-width', '1fr');
+            return;
+        }
+
+        applyEditorWidth(savedWidth);
+    }
+
+    function beginResize(event) {
+        if (window.innerWidth <= 768) {
+            return;
+        }
+
+        event.preventDefault();
+        mainLayout.classList.add('is-resizing');
+
+        const mainRect = mainLayout.getBoundingClientRect();
+
+        function handlePointerMove(moveEvent) {
+            const pointerX = moveEvent.clientX;
+            const rawWidth = pointerX - mainRect.left;
+            applyEditorWidth(rawWidth);
+        }
+
+        function endResize() {
+            mainLayout.classList.remove('is-resizing');
+            window.removeEventListener('pointermove', handlePointerMove);
+            window.removeEventListener('pointerup', endResize);
+        }
+
+        window.addEventListener('pointermove', handlePointerMove);
+        window.addEventListener('pointerup', endResize);
+    }
+
+    editorPreviewDivider.addEventListener('pointerdown', beginResize);
+
+    editorPreviewDivider.addEventListener('keydown', function(event) {
+        if (window.innerWidth <= 768) {
+            return;
+        }
+
+        const currentWidth = Number.parseFloat(getComputedStyle(mainLayout).getPropertyValue('--editor-width')) || mainLayout.getBoundingClientRect().width / 2;
+
+        if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            applyEditorWidth(currentWidth - 24);
+        }
+
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            applyEditorWidth(currentWidth + 24);
+        }
+    });
+
+    window.addEventListener('resize', restoreSavedWidth);
+    restoreSavedWidth();
+}
+
 // Event listeners
 markdownEditor.addEventListener('input', renderMarkdown);
 downloadBtn.addEventListener('click', downloadPDF);
 printBtn.addEventListener('click', printContent);
 copyBtn.addEventListener('click', copyHTML);
+togglePreviewBtn?.addEventListener('click', togglePreviewMaximize);
+previewModalBackdrop?.addEventListener('click', function() {
+    if (isPreviewMaximized) {
+        togglePreviewMaximize();
+    }
+});
 uploadBtn.addEventListener('click', openFileSelector);
 fileUpload.addEventListener('change', handleFileUpload);
 installBtn.addEventListener('click', installPWA);
@@ -446,9 +568,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar sistema de internacionalização
     i18n.init();
+    updatePreviewToggleButton();
     
     // Renderizar preview inicial
     renderMarkdown();
+
+    // Habilitar divisor ajustável entre editor e preview
+    setupResizablePanels();
     
     // Focar no editor
     markdownEditor.focus();
@@ -477,6 +603,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
             e.preventDefault();
             openFileSelector();
+        }
+
+        // Escape para sair do modo preview maximizado
+        if (e.key === 'Escape' && isPreviewMaximized) {
+            e.preventDefault();
+            togglePreviewMaximize();
         }
     });
 });

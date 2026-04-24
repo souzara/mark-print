@@ -238,12 +238,43 @@ header p {
 }
 
 main {
+    --editor-width: 1fr;
+    --divider-width: 12px;
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: minmax(280px, var(--editor-width)) var(--divider-width) minmax(280px, 1fr);
+    gap: 0;
     margin-bottom: 30px;
     height: calc(100vh - 200px);
+}
+
+.editor-preview-divider {
+    background: #e9ecef;
+    cursor: col-resize;
+    position: relative;
+    user-select: none;
+    touch-action: none;
+}
+
+.editor-preview-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 64px;
+    border-radius: 99px;
+    background: #adb5bd;
+}
+
+main.is-resizing {
+    cursor: col-resize;
+}
+
+main.is-resizing * {
+    user-select: none;
+    cursor: col-resize !important;
 }
 
 .editor-section, .preview-section {
@@ -253,6 +284,75 @@ main {
     overflow: visible;
     position: relative;
     z-index: 1;
+}
+
+.editor-section {
+    grid-column: 1;
+}
+
+.editor-preview-divider {
+    grid-column: 2;
+}
+
+.preview-section {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-content {
+    flex: 1;
+    min-height: 0;
+}
+
+.preview-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 900;
+}
+
+main.preview-modal-open .preview-modal-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.preview-modal-open {
+    overflow: hidden;
+}
+
+main.preview-modal-open .preview-section {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: calc(100vh - 48px);
+    margin: 0;
+    z-index: 901;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+main.preview-modal-open .preview-content {
+    height: auto;
+    min-height: 0;
+}
+
+main.preview-modal-open #downloadBtn,
+main.preview-modal-open #printBtn,
+main.preview-modal-open #copyBtn {
+    display: none;
+}
+
+main.preview-modal-open .editor-section,
+main.preview-modal-open .editor-preview-divider {
+    visibility: hidden;
 }
 
 .editor-header, .preview-header {
@@ -504,6 +604,10 @@ footer {
         height: calc(100vh - 180px);
         min-height: 500px;
     }
+
+    .editor-preview-divider {
+        display: none;
+    }
     
     .editor-section, .preview-section {
         width: 100%;
@@ -643,6 +747,10 @@ footer {
     main {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+
+    .editor-preview-divider {
+        display: none;
     }
     
     /* Preservar cores de fundo dos blocos de código na impressão */

@@ -45,6 +45,8 @@ const i18n = {
             printBtnTitle: "Print",
             copyBtn: "📋 Copy HTML",
             copyBtnTitle: "Copy HTML",
+            previewMaximizeTitle: "Maximize preview",
+            previewRestoreTitle: "Restore split view",
             emptyPreview: "Type or paste your markdown in the editor to see the preview...",
             
             // Botões de feedback
@@ -114,6 +116,8 @@ const i18n = {
             printBtnTitle: "Imprimir",
             copyBtn: "📋 Copiar HTML",
             copyBtnTitle: "Copiar HTML",
+            previewMaximizeTitle: "Maximizar preview",
+            previewRestoreTitle: "Restaurar visualização dividida",
             emptyPreview: "Digite ou cole seu markdown no editor para ver o preview...",
             
             // Botões de feedback
@@ -182,6 +186,8 @@ const i18n = {
             printBtnTitle: "Imprimir",
             copyBtn: "📋 Copiar HTML",
             copyBtnTitle: "Copiar HTML",
+            previewMaximizeTitle: "Maximizar vista previa",
+            previewRestoreTitle: "Restaurar vista dividida",
             emptyPreview: "Escribe o pega tu markdown en el editor para ver la vista previa...",
             
             // Botões de feedback
@@ -322,6 +328,15 @@ const i18n = {
                 element.title = translation;
             }
         });
+
+        const togglePreviewBtn = document.getElementById('togglePreviewBtn');
+        if (togglePreviewBtn) {
+            const mainLayout = document.querySelector('main');
+            const key = mainLayout?.classList.contains('preview-modal-open')
+                ? 'previewRestoreTitle'
+                : 'previewMaximizeTitle';
+            togglePreviewBtn.title = this.t(key);
+        }
     },
     
     // Inicializar
