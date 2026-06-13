@@ -280,7 +280,39 @@ function downloadPDF() {
         previewClone.appendChild(style);
         
         document.body.appendChild(previewClone);
-        
+
+        // Medir a posição de cada palavra no clone para criar a camada de
+        // texto selecionável do PDF (o visual continua vindo da imagem)
+        const cloneRect = previewClone.getBoundingClientRect();
+        const mmPerPx = PAGE_WIDTH_MM / cloneWidthPx;
+        const pxToPt = mmPerPx * (72 / 25.4);
+        const textItems = [];
+        const walker = document.createTreeWalker(previewClone, NodeFilter.SHOW_TEXT);
+        let textNode;
+        while ((textNode = walker.nextNode())) {
+            const content = textNode.textContent;
+            if (!content.trim() || !textNode.parentElement) continue;
+            const parentStyle = window.getComputedStyle(textNode.parentElement);
+            if (parentStyle.display === 'none' || parentStyle.visibility === 'hidden') continue;
+            const fontSizePt = parseFloat(parentStyle.fontSize) * pxToPt;
+            const wordRegex = /\S+/g;
+            let match;
+            while ((match = wordRegex.exec(content)) !== null) {
+                const range = document.createRange();
+                range.setStart(textNode, match.index);
+                range.setEnd(textNode, match.index + match[0].length);
+                const rect = range.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) continue;
+                textItems.push({
+                    text: match[0],
+                    x: (rect.left - cloneRect.left) * mmPerPx,
+                    y: (rect.top - cloneRect.top) * mmPerPx,
+                    width: rect.width * mmPerPx,
+                    size: fontSizePt
+                });
+            }
+        }
+
         // Usar html2canvas para capturar o conteúdo (largura fixa A4, conteúdo quebrado)
         html2canvas(previewClone, {
             scale: 2,
@@ -302,6 +334,22 @@ function downloadPDF() {
             // JPEG com qualidade 0.85: reduz drasticamente o tamanho do arquivo vs PNG
             const imgData = canvas.toDataURL('image/jpeg', 0.85);
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidthMm, pdfHeightMm, undefined, 'FAST');
+
+            // Camada de texto invisível sobre a imagem: permite selecionar e
+            // copiar sem alterar em nada o visual capturado do preview
+            pdf.setFont('helvetica', 'normal');
+            textItems.forEach(item => {
+                pdf.setFontSize(item.size);
+                // Escalar a palavra para a largura medida no layout: os gaps
+                // entre palavras ficam reais e o extrator insere os espaços
+                const naturalWidth = pdf.getTextWidth(item.text);
+                const horizontalScale = naturalWidth > 0 ? item.width / naturalWidth : 1;
+                pdf.text(item.text, item.x, item.y, {
+                    baseline: 'top',
+                    renderingMode: 'invisible',
+                    horizontalScale
+                });
+            });
             
             const fileName = `documento_${new Date().toISOString().slice(0, 10)}.pdf`;
             pdf.save(fileName);
