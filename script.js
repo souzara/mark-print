@@ -297,10 +297,11 @@ function downloadPDF() {
             // Página A3 (297mm) de largura, altura proporcional ao conteúdo
             const pdfWidthMm = PAGE_WIDTH_MM;
             const pdfHeightMm = (canvas.height / canvas.width) * pdfWidthMm;
-            const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: [pdfWidthMm, pdfHeightMm] });
-            
-            const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidthMm, pdfHeightMm);
+            const pdf = new jsPDF({ orientation: 'p', unit: 'mm', format: [pdfWidthMm, pdfHeightMm], compress: true });
+
+            // JPEG com qualidade 0.85: reduz drasticamente o tamanho do arquivo vs PNG
+            const imgData = canvas.toDataURL('image/jpeg', 0.85);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidthMm, pdfHeightMm, undefined, 'FAST');
             
             const fileName = `documento_${new Date().toISOString().slice(0, 10)}.pdf`;
             pdf.save(fileName);
