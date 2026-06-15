@@ -1,4 +1,8 @@
-const CACHE_NAME = 'mark-print-v1.0.0';
+// IMPORTANTE: sempre incremente APP_VERSION ao alterar qualquer arquivo do app
+// (script.js, index.html, styles.css, i18n.js, etc.). É isso que força os
+// usuários a receberem a atualização automaticamente. Veja AI_GUIDE.md.
+const APP_VERSION = '1.0';
+const CACHE_NAME = `mark-print-v${APP_VERSION}`;
 const urlsToCache = [
   './',
   './index.html',
@@ -16,10 +20,12 @@ const urlsToCache = [
 
 // Install event - cache resources
 self.addEventListener('install', event => {
+  // Ativa imediatamente a nova versão sem esperar as abas antigas fecharem
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
+        console.log('Opened cache', CACHE_NAME);
         return cache.addAll(urlsToCache);
       })
       .catch(error => {
@@ -79,7 +85,7 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim()) // Assume o controle das abas abertas imediatamente
   );
 });
 

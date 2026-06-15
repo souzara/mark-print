@@ -606,9 +606,33 @@ window.addEventListener('appinstalled', () => {
 document.addEventListener('DOMContentLoaded', function() {
     // Registrar service worker para PWA
     if ('serviceWorker' in navigator) {
+        // Recarrega a página assim que a nova versão do service worker assume o controle
+        let isReloading = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (isReloading) return;
+            isReloading = true;
+            window.location.reload();
+        });
+
         navigator.serviceWorker.register('./sw.js')
             .then(registration => {
                 console.log('Service Worker registered successfully:', registration);
+
+                // Detecta uma nova versão sendo instalada e força a atualização
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    if (!newWorker) return;
+                    newWorker.addEventListener('statechange', () => {
+                        // Só recarrega se já havia uma versão controlando a página
+                        // (instalação inicial não deve recarregar)
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('Nova versão disponível, atualizando...');
+                        }
+                    });
+                });
+
+                // Verifica periodicamente se há uma nova versão publicada
+                setInterval(() => registration.update(), 60 * 60 * 1000);
             })
             .catch(error => {
                 console.log('Service Worker registration failed:', error);
